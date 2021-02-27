@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31019.194
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repro.Faster.MemoryAndSpanByteReadPerf", "Repro.Faster.MemoryAndSpanByteReadPerf\Repro.Faster.MemoryAndSpanByteReadPerf.csproj", "{DD0C48AC-A08F-4A6C-8D36-CBF92F06D064}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DD0C48AC-A08F-4A6C-8D36-CBF92F06D064}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DD0C48AC-A08F-4A6C-8D36-CBF92F06D064}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DD0C48AC-A08F-4A6C-8D36-CBF92F06D064}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DD0C48AC-A08F-4A6C-8D36-CBF92F06D064}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {53BB6321-977C-4106-B38F-C0CAAD4D49ED}
+	EndGlobalSection
+EndGlobal
