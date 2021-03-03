@@ -15,6 +15,8 @@ namespace Repro.Faster.MemoryAndSpanByteReadPerf
         private readonly FasterKV<int, Memory<byte>> _kvStore;
         private readonly FasterKV<int, Memory<byte>>.ClientSessionBuilder<Memory<byte>, (IMemoryOwner<byte>, int), Empty> _clientSessionBuilder;
 
+        public int NumSessions => _sessionPool.Count;
+
         public MemoryMinimalKVStore()
         {
             // Settings

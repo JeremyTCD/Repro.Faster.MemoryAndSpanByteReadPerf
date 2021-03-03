@@ -1,5 +1,6 @@
 ﻿using BenchmarkDotNet.Attributes;
 using FASTER.core;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -78,6 +79,13 @@ namespace Repro.Faster.MemoryAndSpanByteReadPerf
         {
             _readTasks.Clear();
         }
+
+        [IterationCleanup(Targets = new string[] { nameof(ObjLogStore_Reads), nameof(MemoryStore_Reads), nameof(SpanByteStore_Reads) })]
+        public void IterationCleanup()
+        {
+            Console.WriteLine($"Existing number of sessions: {_minimalKVStore.NumSessions}");
+        }
+
 
         [GlobalCleanup(Targets = new string[] { nameof(ObjLogStore_Reads), nameof(MemoryStore_Reads), nameof(SpanByteStore_Reads) })]
         public void GlobalCleanup()

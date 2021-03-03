@@ -14,6 +14,8 @@ namespace Repro.Faster.MemoryAndSpanByteReadPerf
         private readonly FasterKV<int, string> _kvStore;
         private readonly FasterKV<int, string>.ClientSessionBuilder<string, string, Empty> _clientSessionBuilder;
 
+        public int NumSessions => _sessionPool.Count;
+
         public ObjLogMinimalKVStore()
         {
             // Settings
@@ -64,6 +66,8 @@ namespace Repro.Faster.MemoryAndSpanByteReadPerf
 
         public void Dispose()
         {
+            Console.WriteLine($"Number of sessions created: {_sessionPool.Count})");
+
             foreach (var session in _sessionPool)
             {
                 session.Dispose();
