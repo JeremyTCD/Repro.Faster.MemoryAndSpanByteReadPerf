@@ -9,7 +9,58 @@ namespace Repro.Faster.MemoryAndSpanByteReadPerf
 {
     public class Program
     {
-        public static async Task Main(string[] args)
+        private static IMinimalKVStore _minimalKVStore;
+        private const int READ_NUM_OPERATIONS = 10_000;
+        private static List<Task> _readTasks = new();
+
+        public static async Task Main()
+        {
+            await MemoryDiagnostics();
+
+            //await RunBenchmarks();
+        }
+
+        private static async Task MemoryDiagnostics()
+        {
+            _minimalKVStore = new SpanByteMinimalKVStore();
+
+            // Insert
+            Parallel.For(0, READ_NUM_OPERATIONS, key => _minimalKVStore.Upsert(key, key.ToString()));
+
+            // Create Session instances
+            await ReadAll();
+
+            // Test
+            await ReadAll();
+            await ReadAll();
+            await ReadAll();
+        }
+
+        private static async Task ReadAll()
+        {
+            // Clear old tasks
+            foreach (Task task in _readTasks)
+            {
+                task.Dispose();
+            }
+            _readTasks = new();
+
+            // Read
+            for (int key = 0; key < READ_NUM_OPERATIONS; key++)
+            {
+                _readTasks.Add(ReadAsync(key));
+            }
+            await Task.WhenAll(_readTasks).ConfigureAwait(false);
+        }
+
+        private static async Task<(Status, string?)> ReadAsync(int key)
+        {
+            await Task.Yield();
+
+            return await _minimalKVStore.ReadAsync(key).ConfigureAwait(false);
+        }
+
+        private static async Task RunBenchmarks()
         {
             await VerifyStoreWorks(new ObjLogMinimalKVStore());
             await VerifyStoreWorks(new MemoryMinimalKVStore());
